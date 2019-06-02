@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
-Version Number: **4.5.9**
+Version Number: **4.6.0**
 <br>
-Revision Date: **May 02, 2019**
+Revision Date: **May 30, 2019**
 
 ## Anonymous Call Mobile SDK overview
 
@@ -15,7 +15,7 @@ The Anonymous Call Mobile SDK has the following characteristics:
 
 See [Appendix A: High-level Anonymous Call Mobile SDK structure](#appendix-a-high-level-anonymous-call-mobile-sdk-structure) for a high-level view of the Anonymous Call Mobile SDK and its sub-modules.
 
-The Anonymous Call Mobile SDK for Android is compatible with Android 4.1.x-9.x and has been tested on the Nexus 7, Nexus 5, Samsung Note 3, Samsung Note 5, Samsung S7, HTC Desire 626, HTC One A9, HTC 10, LG G2, LG G3, LG G5, LG G6, SONY XPERIA Z5, SONY XPERIA XZ, General Mobile GM 5+, Huawei P10.
+The Anonymous Call Mobile SDK for Android is compatible with Android 4.1.x-9.x and has been tested on the Nexus 7, Nexus 5, Samsung Note 3, Samsung Note 5, Samsung S7, HTC Desire 626, HTC One A9, HTC 10, LG G2, LG G3, LG G5, LG G6, SONY XPERIA Z5, SONY XPERIA XZ, General Mobile GM 5+.
 
 ### What's in this document?
 
@@ -1609,8 +1609,8 @@ Set your application to use the WebRTC default set or the Mobile SDK preferred s
 
 ###### WebRTC default settings, MobileSDK preferred default settings, and acceptable values
 
-|   | WebRTC default | Mobile SDK preferred | Acceptable values |
-|----|----|----|----|----|
+|  | WebRTC default | Mobile SDK preferred | Acceptable values |
+|----|----|----|----|
 | MaxPlaybackRate | 24000  | 16000  | 8000-48000  |
 | MaxAverageBitRate | 40000  | 20000  | 6000-510000  |
 | DTX | Disabled  | Enabled  | true or false  |
