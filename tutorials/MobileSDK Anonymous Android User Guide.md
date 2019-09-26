@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
-Version Number: **4.6.2**
+Version Number: **5.0.0**
 <br>
-Revision Date: **September 2, 2019**
+Revision Date: **September 30, 2019**
 
 ## Anonymous Call Mobile SDK overview
 
@@ -28,10 +28,6 @@ This document provides help getting started developing your mobile application u
 
 The following items need to be complete prior to beginning work on your application:
 
-* You have downloaded the MobileSDKAnonymous package from http://developer.genband.com/MobileSDK .
-* You have extracted the contents of the MobileSDKAnonymous package and located:
-  * The MobileSDKAnonymous jar file
-  * The libjingle_peerconnection_so.so file
 * Your Android Studio development environment is set up and ready for new projects.
 * You are familiar with Android development fundamentals.
 * You know the IP address and port of the SPiDR/Kandy Link server.
@@ -40,11 +36,11 @@ The following items need to be complete prior to beginning work on your applicat
 
 ## Get Started
 
-This section provides an example of creating your Android project and using the Anonymous Call Mobile SDK in your project. Android Studio 3.3 is used for this example, but you may use your development environment of choice to create your project.
+This section provides an example of creating your Android project and using the Anonymous Call Mobile SDK in your project. Android Studio 3.4.2 is used for this example, but you may use your development environment of choice to create your project.
 
 ### Create your Android project
 
-The following procedure uses Android Studio IDE to illustrate adding the Anonymous Call Mobile SDK library file to the Android application's build path.
+The following procedure uses Android Studio IDE to create a simple application which can use Anonymous Call MobileSDK. 
 
 1. Open the development environment (in this example, Android Studio).
 2. Click **Start a new Android Studio project**.
@@ -63,52 +59,93 @@ The following procedure uses Android Studio IDE to illustrate adding the Anonymo
 
     Note that, this is the minimum Android SDK API version that the demo application supports.
 
-    For the target SDK version, Google suggests to set API Level 26 or higher. Target SDK can be changed on **build.gradle** file after the project creation.
+    For the target SDK version, Please check Google suggestion from the [link](https://developer.android.com/distribute/best-practices/develop/target-sdk). Target SDK can be changed on **build.gradle** file after the project creation.
 
 ![alt text](images/get_started_3.png "")
 
-5. Copy the Anonymous Call Mobile SDK jar file under your application's **libs** folder.
 
+### Adding Anonymous Call Mobile SDK dependency to your project
+
+There are 2 option to add Anonymous Call Mobile SDK dependency to your project. You can add Anonymous Call Mobile SDK dependency from github repository or you can add it your project manually. This document will explain both options in detail. 
+
+
+#### Adding Anonymous Call Mobile SDK dependency to your project from GitHub repository
+1. Add Anonymous Call Mobile SDK repository url to your root level **build.gradle** file. 
+
+
+	```
+	allprojects {
+    	repositories {
+        	google()
+        	jcenter()
+
+        	maven {
+         	  url "https://raw.githubusercontent.com/Kandy-IO/kandy-anonymous-android-sdk/master/dist/"
+        	}
+   		}
+	}
+	```
+	
 ![alt text](images/get_started_4.png "")
 
-6. In MobileSDKAnonymous-x.x.x.zip”, along with the MobileSDKAnonymous_x.x.x.jar, you will also find native WebRTC library called "libjingle_peerconnection_so.so", compiled for different architectures.
+2. Add dependcy of Anonymous Call Mobile SDK to your app level **build.gradle** file.
 
-In Android projects the ones in “armeabi” and "arm64-v8a" folders will be used. If you wish to use simulator for testing, then you should use the "x86" library as well. Move those folders named under the **libs** folder in the project along with the "libjingle_peerconnection_so.so" files, described above, inside them.
+	```
+	implementation 'com.kandy.mobile:kandyanonymousmobilesdk:{version}'
 
-![alt text](images/get_started_5.png "")
+	```
 
-7. Open **build.gradle** file, located under **app** module of **AnonymousCallMobileSDKDemo** project. Add the configuration script below to the file, in order the application to locate libjingle library (and other JNI libraries if used in the application).
+	![alt text](images/get_started_5.png "")
 
-```
-android {
-    .
-    .
-    .
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
-}
-```
+	---
+	**NOTE**
 
-![alt text](images/get_started_6.png "")
+	Check latest version of Anonymous Call Mobile SDK from [GitHub](https://github.com/Kandy-IO/kandy-anonymous-android-sdk). 
 
-8. An Android application project must be compatible with Java 8 when it is using Anonymous Call Mobile SDK library. This necessity comes from the WebRTC library, its code is dependent on some Java 8 features. In order to set this compliance, open **build.gradle** file, located under **app** module of **AnonymousCallMobileSDKDemo** project. Add the configuration script below to the file.
+	---
 
-```
-android {
-    .
-    .
-    .
-    compileOptions {
+
+#### Adding Anonymous Call Mobile SDK dependency to your project manually
+
+
+1. Download latest Anonymous Call Mobile SDK version from [GitHub](https://github.com/Kandy-IO/kandy-anonymous-android-sdk) and copy **aar** file to your project **lib** folder.
+
+ ![alt text](images/get_started_6.png "")
+
+
+2. After that you need to inform gradle that your app will use manual aar files. To do that add **flatDir** path to your root level **build.gradle** file as in the example above.
+
+	```
+	flatDir {
+       dirs 'libs'
+   }
+	```
+ ![alt text](images/get_started_12.png "")
+
+3. Add dependcy of Anonymous Call Mobile SDK to your app level **build.gradle** file with **@aar** prefix.
+
+	```
+	implementation 'com.kandy.mobile:kandyanonymousmobilesdk:{version}@aar'
+
+	```
+
+	![alt text](images/get_started_13.png "")
+
+
+### Adding Java 8 support
+ An Android application project must be compatible with Java 8 when it is using Mobile SDK library. This necessity comes from the WebRTC library, its code is dependent on some Java 8 features. In order to set this compliance, open **build.gradle** file, located under **app** module of **AnonymousCallMobileSDKDemoApp** project. Add the configuration script below to the file.
+
+	```	
+	android{
+		compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-}
-```
-
+	}
+	```
+	
 ![alt text](images/get_started_7.png "")
+
 
 ### Use the Anonymous Call Mobile SDK in your Android project
 

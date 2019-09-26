@@ -1,10 +1,32 @@
 # Kandy Link Anonymous Android SDK
 
-SDK jar file and WebRTC libraries for `armeabi`, `arm64-v8a` and `x86` architectures can be found in the
-[SDK collection](https://github.com/Kandy-IO/kandy-anonymous-android-sdk/tree/master/dist).
+## Installation
+To integrate Kandy Link Anonymous Android SDK to your project add gradle dependencies as described in above.
 
-MD5 Checksum for SDK collection : 402274f8096ae59bde61ed5cb4d7928e
+### Step 1
+Add Kandy Link Anonymous Android SDK Maven url to your root level `build.gradle` file.
+```
+allprojects {
+    repositories {
+    ....
+        maven {
+            url "https://raw.githubusercontent.com/Kandy-IO/kandy-anonymous-android-sdk/master/dist/"
+        }   
+    }
+    ...
+}
+```
 
+### Step 2
+Add dependcy of Kandy Link Anonymous Android SDK to your app level `build.gradle` file.
+
+```
+implementation 'com.kandy.mobile:kandyanonymousmobilesdk:5.0.0'
+```
+
+That's all! You can use Kandy Link Anonymous Android SDK after you sync gradle.
+
+## Compatibility
 Compatible Android OS versions :
 
 * Android 4.1+ - Android 10.0
