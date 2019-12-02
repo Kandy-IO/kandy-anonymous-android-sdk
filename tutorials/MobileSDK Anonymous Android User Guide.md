@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
-Version Number: **5.1.0**
+Version Number: **5.2.0**
 <br>
-Revision Date: **November 4, 2019**
+Revision Date: **December 2, 2019**
 
 ## Anonymous Call Mobile SDK overview
 
@@ -275,7 +275,7 @@ public void startCall() {
     } catch (MobileException exception) {
     }
     callService.createOutgoingCall("AnonymousCaller", " alice@rbbn.com ",
-            MainActivity.this, new OutgoingCallCreateInterface() {
+            new OutgoingCallCreateInterface() {
                 @Override
                 public void callCreated(OutgoingCallInterface callInterface) {
                     call = callInterface;
@@ -570,7 +570,7 @@ public void anonymousCallExample() {
     AnonymousServiceProvider serviceProvider = AnonymousServiceProvider.getInstance(getApplicationContext());
     CallServiceInterface callService = serviceProvider.getCallService();
 
-    callService.createOutgoingCall(terminatorAddress, this, new OutgoingCallCreateInterface()
+    callService.createOutgoingCall(terminatorAddress, new OutgoingCallCreateInterface()
     {
         @Override
         public void callCreated(OutgoingCallInterface callInterface) {
@@ -633,7 +633,7 @@ public void anonymousCallExample() {
     AnonymousServiceProvider serviceProvider = AnonymousServiceProvider.getInstance(getApplicationContext());
     CallServiceInterface callService = serviceProvider.getCallService();
 
-    callService.createOutgoingCall(accountToken, originatorToken, terminatorToken, tokenRealm, this, new OutgoingCallCreateInterface()
+    callService.createOutgoingCall(accountToken, originatorToken, terminatorToken, tokenRealm, new OutgoingCallCreateInterface()
     {
         @Override
         public void callCreated(OutgoingCallInterface callInterface) {
@@ -1108,7 +1108,7 @@ If desired, custom SIP Headers can be send while initiating call and/or during t
 
 ```java
 public void callWithCustomHeadersExample(String terminatorAddress, boolean videoEnabled, Map<String, String> customParameters) {
-    callService.createOutgoingCall(terminatorAddress, this, new OutgoingCallCreateInterface()
+    callService.createOutgoingCall(terminatorAddress, new OutgoingCallCreateInterface()
     {
         @Override
         public void callCreated(OutgoingCallInterface callInterface) {

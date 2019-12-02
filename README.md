@@ -1,30 +1,34 @@
 # Kandy Link Anonymous Android SDK
 
 ## Installation
-To integrate Kandy Link Anonymous Android SDK to your project add gradle dependencies as described in above.
+To integrate Kandy Link Anonymous Android SDK to your project add gradle dependencies as described below.
 
 ### Step 1
-Add Kandy Link Anonymous Android SDK Maven url to your root level `build.gradle` file.
+Add Kandy Link Anonymous Android SDK maven repository url to your root level `build.gradle` file.
+
 ```
 allprojects {
-    repositories {
+  ...
+  repositories {
     ...
-        maven {
-            url "https://raw.githubusercontent.com/Kandy-IO/kandy-anonymous-android-sdk/master/dist/"
-        }
+    maven {
+      url "https://raw.githubusercontent.com/Kandy-IO/kandy-anonymous-android-sdk/master/dist/"
     }
-    ...
+  }
 }
 ```
 
 ### Step 2
-Add dependcy of Kandy Link Anonymous Android SDK to your app level `build.gradle` file.
+Add dependency of Kandy Link Anonymous Android SDK to your app level `build.gradle` file.
 
 ```
-implementation 'com.kandy.mobile:kandyanonymousmobilesdk:5.0.0'
+implementation 'com.kandy.mobile:kandyanonymousmobilesdk:5.2.0'
 ```
 
 That's all! You can use Kandy Link Anonymous Android SDK after you sync gradle.
+
+## Installation for versions before 5.0.0
+Versions before 5.0.0 will require manual installation. To download an older version, switch to tag of that specific version. Then download the MobileSDKAnonymous-4.x.x.zip file under "dist" directory.
 
 ## Compatibility
 Compatible Android OS versions :
