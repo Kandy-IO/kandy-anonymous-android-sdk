@@ -5,6 +5,12 @@ Kandy Link Anonymous Android SDK change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 5.3.0 - 2020-01-09
+
+### Fixed
+- Fixed internal error handling issue during anonymous (un)subscription  `KAE-574`
+
+
 ## 5.2.0 - 2019-12-02
 
 ### Added

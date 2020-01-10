@@ -1,5 +1,9 @@
 # Kandy Link Anonymous Android SDK
 
+<p>
+    <img alt="GitHub release" src="https://img.shields.io/github/v/release/kandy-io/kandy-anonymous-android-sdk">
+</p>
+
 ## Installation
 To integrate Kandy Link Anonymous Android SDK to your project add gradle dependencies as described below.
 
@@ -22,7 +26,7 @@ allprojects {
 Add dependency of Kandy Link Anonymous Android SDK to your app level `build.gradle` file.
 
 ```
-implementation 'com.kandy.mobile:kandyanonymousmobilesdk:5.2.0'
+implementation 'com.kandy.mobile:kandyanonymousmobilesdk:5.3.0'
 ```
 
 That's all! You can use Kandy Link Anonymous Android SDK after you sync gradle.
