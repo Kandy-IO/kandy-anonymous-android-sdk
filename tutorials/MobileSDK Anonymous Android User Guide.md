@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
 Version Number: **$SDK_VERSION$**
 <br>
-Revision Date: **July 22, 2020**
+Revision Date: **August 28, 2020**
 
 ## Anonymous Call Mobile SDK overview
 
@@ -696,7 +696,7 @@ public class LogUtilityExample implements LoggingInterface {
             Log.e(tag, message);
         } else if(loglevel == LogLevel.WARNING) {
             Log.w(tag, message);
-        } else if(loglevel == LogLevel.INFO) {
+        } else if(loglevel == LogLevel.TRACE) {
             Log.i(tag, message);
         } else {
             Log.d(tag, message);
@@ -715,7 +715,7 @@ class LogUtilityExample : LoggingInterface {
             Log.e(tag, message)
         } else if(loglevel == Constants.LogLevel.WARNING) {
             Log.w(tag, message)
-        } else if(loglevel == Constants.LogLevel.INFO) {
+        } else if(loglevel == Constants.LogLevel.TRACE) {
             Log.i(tag, message)
         } else {
             Log.d(tag, message)
@@ -734,7 +734,7 @@ class LogUtilityExample : LoggingInterface {
 ```java
 public void initializeAndUseLogger() {
 	Configuration.getInstance().setLogger(new LogUtilityExample());
-	LogManager.log(LogLevel.INFO, "Test", "logger is initialized");
+	LogManager.log(LogLevel.TRACE, "Test", "logger is initialized");
 }
 ```
 
@@ -743,10 +743,12 @@ public void initializeAndUseLogger() {
 ```kotlin
 fun initializeAndUseLogger(){
         Configuration.getInstance().logger = LogUtilityExample()
-        LogManager.log(Constants.LogLevel.INFO,"Test","logger is initialized")
+        LogManager.log(Constants.LogLevel.TRACE,"Test","logger is initialized")
     }
 ```
 <!-- tabs:end -->
+
+Our recommendation is to store the logs in memory and provide the ability to send them log file over e-mail to our support team if issues are encountered.
 
 <div class="page-break"></div>
 
