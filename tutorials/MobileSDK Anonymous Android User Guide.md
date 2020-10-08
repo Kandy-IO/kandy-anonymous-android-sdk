@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
 Version Number: **$SDK_VERSION$**
 <br>
-Revision Date: **August 28, 2020**
+Revision Date: **October 05, 2020**
 
 ## Anonymous Call Mobile SDK overview
 
@@ -167,6 +167,7 @@ The following is an example using the Anonymous Call Mobile SDK in Android:
 ![alt text](images/get_started_10.png "")
 
 2. Add the following permissions to the manifest file like that sample:
+**Warning:** It is application developer's responsibility to make sure the related permission is granted before it is used in order to prevent possible crashes. Namely, if developer wants to establish an audio call,she or he is supposed to check "android.permission.RECORD_AUDIO" permission is granted. If not they should not let call establish.
 
 ```xml
 <manifest xlmns:android...>
@@ -748,7 +749,119 @@ fun initializeAndUseLogger(){
 ```
 <!-- tabs:end -->
 
-Our recommendation is to store the logs in memory and provide the ability to send them log file over e-mail to our support team if issues are encountered.
+Our recommendation is to store the logs in memory and provide the ability to send them log file over e-mail to our support team if issues are encountered.Please check our sample below.
+
+You can store logs like :
+
+<!-- tabs:start -->
+
+#### ** Java Code **
+
+```java
+public class LogHelper {
+    public static File logFile;
+
+    public static void saveLog() {
+        if (isExternalStorageWritable()) {
+
+            File appDirectory = new File(Environment.getExternalStorageDirectory() + "/KandyLinkDemoApp");
+            File logDirectory = new File(appDirectory + "/log");
+            LogHelper.logFile = new File(logDirectory, "KandyLinkAndroidLogs" + ".txt");
+
+            // create app folder
+            if (!appDirectory.exists()) {
+                appDirectory.mkdir();
+            }
+
+            // create log folder
+            if (!logDirectory.exists()) {
+                logDirectory.mkdir();
+            }
+
+            try {
+                Process process = Runtime.getRuntime().exec("logcat -c");
+                process = Runtime.getRuntime().exec("logcat -f " + LogHelper.logFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (isExternalStorageReadable()) {
+            // only readable
+        } else {
+            // not accessible
+        }
+    }
+
+    /* Checks if external storage is available for read and write */
+    public static boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    /* Checks if external storage is available to at least read */
+    public static boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
+    }
+}
+```
+
+#### ** Kotlin Code **
+
+```kotlin
+object LogHelper {
+    var logFile: File? = null
+    
+    fun saveLog() {
+        when {
+            isExternalStorageWritable -> {
+                val appDirectory =
+                    File(Environment.getExternalStorageDirectory().toString() + "/KandyLinkDemoApp")
+                val logDirectory = File("$appDirectory/log")
+                logFile = File(logDirectory, "KandyLinkAndroidLogs" + ".txt")
+
+                // create app folder
+                if (!appDirectory.exists()) {
+                    appDirectory.mkdir()
+                }
+
+                // create log folder
+                if (!logDirectory.exists()) {
+                    logDirectory.mkdir()
+                }
+                try {
+                    var process = Runtime.getRuntime().exec("logcat -c")
+                    process = Runtime.getRuntime().exec("logcat -f $logFile")
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            isExternalStorageReadable -> {
+                // only readable
+            }
+            else -> {
+                // not accessible
+            }
+        }
+    }
+
+    /* Checks if external storage is available for read and write */
+    private val isExternalStorageWritable: Boolean
+        get() {
+            val state = Environment.getExternalStorageState()
+            return Environment.MEDIA_MOUNTED == state
+        }
+
+    /* Checks if external storage is available to at least read */
+    private val isExternalStorageReadable: Boolean
+        get() {
+            val state = Environment.getExternalStorageState()
+            return Environment.MEDIA_MOUNTED == state || Environment.MEDIA_MOUNTED_READ_ONLY == state
+        }
+}
+```
+<!-- tabs:end -->
 
 <div class="page-break"></div>
 
@@ -922,6 +1035,118 @@ val passOfFirst = servicesArray.first().password
 If a server URL is entered multiple times, the last username and password will be used for the specified server. To remove a server, you must remove the existing one and create a new instance, defining necessary servers again.
 
 ### Make an anonymous call
+
+**WARNING:** Before creating an anonymous call, it is completely the application developer's responsibility to check if the related permissions are granted or not. If not granted, call should not be created in order to prevent crashes.
+
+For Audio Call, `android.permission.RECORD_AUDIO` permission should be granted.
+For Video Call, `android.permission.RECORD_AUDIO` and `android.permission.CAMERA` permissions should be granted.
+
+<!-- tabs:start -->
+
+#### ** Java Code **
+
+```java
+public class PermissionHelper{
+
+  private static int REQUEST_WRITE_STORAGE_REQUEST_CODE = 100;
+  private static String[] audioCallPermission = {Manifest.permission.RECORD_AUDIO};
+  private static String[] videoCallPermissions = {Manifest.permission.CAMERA,
+                                                    Manifest.permission.RECORD_AUDIO};
+public static boolean hasAudioCallPermission(Context context){
+        return (ContextCompat.checkSelfPermission(context,Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED);
+    }
+
+public static boolean hasVideoCallPermissions(Context context){
+        return (ContextCompat.checkSelfPermission(context,Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)
+                && (ContextCompat.checkSelfPermission(context,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
+    }
+public static void requestAudioCallPermission(Activity activity){
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+
+        if (hasAudioCallPermission(activity)) {
+            return;
+        }
+
+        ActivityCompat.requestPermissions(activity,
+                audioCallPermission, REQUEST_WRITE_STORAGE_REQUEST_CODE); // your request code
+    }
+
+
+public static void requestVideoCallPermissions(Activity activity){
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+
+        if (hasVideoCallPermissions(activity)) {
+            return;
+        }
+
+        ActivityCompat.requestPermissions(activity,
+                videoCallPermissions, REQUEST_WRITE_STORAGE_REQUEST_CODE); // your request code
+    }
+}    
+```
+
+```kotlin
+class PermissionHelper {
+        private val REQUEST_WRITE_STORAGE_REQUEST_CODE = 100
+        private val audioCallPermission =
+            arrayOf(Manifest.permission.RECORD_AUDIO)
+        private val videoCallPermissions = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO
+        )
+
+        fun hasAudioCallPermission(context: Context): Boolean {
+            return ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.RECORD_AUDIO
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+
+        fun hasVideoCallPermissions(context: Context): Boolean {
+            return (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.RECORD_AUDIO
+            ) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED)
+        }
+
+        fun requestAudioCallPermission(activity: Activity) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                return
+            }
+            if (hasAudioCallPermission(activity)) {
+                return
+            }
+            ActivityCompat.requestPermissions(
+                activity,
+                audioCallPermission, REQUEST_WRITE_STORAGE_REQUEST_CODE
+            ) // your request code
+        }
+
+        fun requestVideoCallPermissions(activity: Activity) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                return
+            }
+            if (hasVideoCallPermissions(activity)) {
+                return
+            }
+            ActivityCompat.requestPermissions(
+                activity,
+                videoCallPermissions, REQUEST_WRITE_STORAGE_REQUEST_CODE
+            ) // your request code
+        }
+}
+```
+
+<!-- tabs:end -->
+
 
 Use the Anonymous Call functionality to place audio only or audio/video calls anonymously (without logging in with a username and password). The Anonymous Call Mobile SDK supports establishing calls with only one m line (audio only) or with two m lines (audio and video or one sendrecv/sendonly audio and one recvonly video m line). The number of m lines in the response should match the number of m lines in the initial offer.
 
