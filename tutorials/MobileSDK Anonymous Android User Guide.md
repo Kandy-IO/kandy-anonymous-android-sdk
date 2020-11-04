@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
 Version Number: **$SDK_VERSION$**
 <br>
-Revision Date: **October 05, 2020**
+Revision Date: **November 04, 2020**
 
 ## Anonymous Call Mobile SDK overview
 
@@ -90,7 +90,7 @@ allprojects {
 2. Add dependency of Anonymous Call Mobile SDK to your app level **build.gradle** file.
 
 ```groovy
-implementation 'com.kandy.mobile:kandyanonymousmobilesdk:{$SDK_VERSION$}'
+implementation 'com.kandy.mobile:kandyanonymousmobilesdk:$SDK_VERSION$'
 ```
 
 ![alt text](images/get_started_5.png "")
@@ -119,7 +119,7 @@ flatDir {
 3. Add dependency of Anonymous Call Mobile SDK to your app level **build.gradle** file with **@aar** prefix.
 
 ```groovy
-implementation 'com.kandy.mobile:kandyanonymousmobilesdk:{$SDK_VERSION$}@aar'
+implementation 'com.kandy.mobile:kandyanonymousmobilesdk:$SDK_VERSION$@aar'
 ```
 
 ![alt text](images/get_started_8.png "")
