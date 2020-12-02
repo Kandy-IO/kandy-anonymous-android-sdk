@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
 Version Number: **$SDK_VERSION$**
 <br>
-Revision Date: **November 04, 2020**
+Revision Date: **December 02, 2020**
 
 ## Anonymous Call Mobile SDK overview
 
@@ -138,23 +138,6 @@ android{
 ```
 
 ![alt text](images/get_started_9.png "")
-
-### Suggested Config for Publishing APK on Google Play Store
-
-For publishing your app in Google Play Store, correct architecture of CPUs must be included your APK. For that reason, open root level **build.gradle** file and add this gradle config.
-
-```groovy
-android {
-    buildTypes {
-        debug {
-            ndk { abiFilters "x86", "arm64-v8a", "armeabi-v7a" }
-        }
-        release {
-            ndk { abiFilters "arm64-v8a", "armeabi-v7a" }
-        }
-    }
-}
-```
 
 ### Use the Anonymous Call Mobile SDK in your Android project
 
@@ -2390,8 +2373,8 @@ If you do not add any codecs to the preferredCodecSet variable, Mobile SDK will 
 
 If you create the preferredCodecSet variable with a default constructor, the Mobile SDK uses the default codecs in the following priority order:
 
-* Audio Codecs: AC_OPUS, AC_G722, AC_PCMA, AC_PCMU, AC_ISAC, AC_ILBC
-* Video Codecs: VC_VP8, VC_VP9, VC_H264
+* Audio Codecs: $AUDIO_CODECS$
+* Video Codecs: $VIDEO_CODECS$
 
 ###### Example: Setting codec priority
 
@@ -2400,50 +2383,13 @@ If you create the preferredCodecSet variable with a default constructor, the Mob
 #### ** Java Code **
 
 ```java
-CodecSet preferredCodecSet = new CodecSet();
-AudioCodecType audioCodecs[] = {AudioCodecType.AC_G722, AudioCodecType.AC_PCMA, AudioCodecType.AC_PCMU}
-preferredCodecSet.setAudioCodecs(audioCodecs);
-
-VideoCodecType videoCodecs[] = {VideoCodecType.VC_VP8};
-preferredCodecSet.setVideoCodecs(videoCodecs);
-
-Configuration.getInstance().setPreferredCodecSet(preferredCodecSet);
+$CODEC_EXAMPLE_JAVA$
 ```
 
 #### ** Kotlin Code **
 
 ```kotlin
-val preferredCodecSet = CodecSet()
-val audioCodecs = arrayOf(CodecSet.AudioCodecType.AC_G722, CodecSet.AudioCodecType.AC_PCMA, CodecSet.AudioCodecType.AC_PCMU)
-preferredCodecSet.setAudioCodecs(audioCodecs)
-
-val videoCodecs = arrayOf(CodecSet.VideoCodecType.VC_VP8)
-preferredCodecSet.setVideoCodecs(videoCodecs)
-
-Configuration.getInstance().preferredCodecSet = preferredCodecSet
-```
-<!-- tabs:end -->
-
-Or
-
-<!-- tabs:start -->
-
-#### ** Java Code **
-
-```java
-AudioCodecType audioCodecs[] = {AudioCodecType.AC_G722, AudioCodecType.AC_PCMA, AudioCodecType.AC_PCMU}
-VideoCodecType videoCodecs[] = {VideoCodecType.VC_VP8};
-CodecSet preferredCodecSet = new CodecSet(audioCodecs, videoCodecs);
-Configuration.getInstance().setPreferredCodecSet(preferredCodecSet);
-```
-
-#### ** Kotlin Code **
-
-```kotlin
-val audioCodecs = arrayOf(CodecSet.AudioCodecType.AC_G722, CodecSet.AudioCodecType.AC_PCMA, CodecSet.AudioCodecType.AC_PCMU)
-val videoCodecs = arrayOf(CodecSet.VideoCodecType.VC_VP8)
-val preferredCodecSet = CodecSet(audioCodecs,videoCodecs)
-Configuration.getInstance().preferredCodecSet = preferredCodecSet
+$CODEC_EXAMPLE_KOTLIN$
 ```
 <!-- tabs:end -->
 
