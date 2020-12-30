@@ -5,6 +5,16 @@ Kandy Link Anonymous Android SDK change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 5.14.0 - 2021-12-30
+
+### Deprecated
+- `DTLS`, `securedWSProtocol`, `requestProtocolHttp`, `kandyVersion`, `kandyToken`, `deviceId`, `deviceNativeId`, `sendKandyTokenInRestHeader`, `connectionType`, `auditEnable`, `supportedCallFeautes`, `notificationType` parameters removed from Configuration class. `KAE-869`
+
+### Added
+- `isRingingFeedbackEnabled` and `setRingingFeedbackEnabled` added to Configuration class in order to set and/or check ringing feedback feature.
+
+### Renamed
+- `replaceCodecSet` parameter renamed as `codecPayloadTypeSet` in Configuration class. `KAE-869`
 
 ## 5.13.0 - 2020-12-02
 
