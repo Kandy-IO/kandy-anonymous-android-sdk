@@ -5,6 +5,17 @@ Kandy Link Anonymous Android SDK change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 5.23.0 - 2021-11-03
+
+### Removed
+- `setRingingFeedbackEnabled(boolean ringingFeedbackEnabled)` was removed.
+- `isRingingFeedbackEnabled()` was removed.
+- `getLoginType()` was removed.
+- `setLoginType(Constants.LoginType loginType)` was removed.
+
+### Fixed
+- The error that occurs if the `getAvailableCodecs(CodecType codecType)` API is called before calling the `establishCall(boolean videoEnabled)` API on the OutgoingCall object in the call creation scenario is resolved.
+
 ## 5.22.0 - 2021-09-27
 
 ## 5.21.1 - 2021-08-25
