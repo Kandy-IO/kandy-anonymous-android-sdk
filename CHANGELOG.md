@@ -5,6 +5,10 @@ Kandy Link Anonymous Android SDK change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 6.1.0 - 2022-28-03
+### Fixed
+- HMAC Token Authentication Re-registration. `KAE-1120`
+
 ## 6.0.0 - 2022-28-02
 
 ### Added
