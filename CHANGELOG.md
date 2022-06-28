@@ -5,10 +5,16 @@ Kandy Link Anonymous Android SDK change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
-## 6.3.0 - 2022-09-06
+## 6.4.0 - 2022-28-06
+
+### Changed
+- Ringing feedback types are refactored. `KAE-1267`
 
 ### Fixed
-- Freezing of remote video issue is fixed. `KAE-1246`
+- Remote video view freeze issue is fixed. `KAE-1300`
+- Creating offer SDP with wrong payload numbers issue fixed. `KAE-1306`
+
+## 6.3.0 - 2022-27-05
 
 ## 6.2.0 - 2022-25-04
 
