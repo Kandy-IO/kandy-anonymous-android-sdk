@@ -1,7 +1,7 @@
 # Anonymous Call Mobile SDK User Guide for Android
 Version Number: **$SDK_VERSION$**
 <br>
-Revision Date: **June 28, 2022**
+Revision Date: **August 2, 2022**
 
 ## Anonymous Call Mobile SDK overview
 
